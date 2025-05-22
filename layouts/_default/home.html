@@ -1,7 +1,8 @@
 {{ define "main" }}
+<!-- 首页内容 -->
 <div class="home-content">
-    <h1 class="site-title">欢迎来到文浩的技术博客</h1>
-    <p class="site-description">这里是我记录技术学习、经验分享和个人成长的地方。</p>
+    <h1 class="site-title">{{ .Site.Title }}</h1>
+    <p class="site-description">{{ .Site.Params.description }}</p>
     
     <!-- 添加分类导航 -->
     <div class="taxonomy-section">

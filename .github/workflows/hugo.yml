@@ -56,8 +56,8 @@ jobs:
           hugo \
             --minify \
             --verbose \
-            --baseURL "${{ steps.pages.outputs.base_url }}/"
-          cp index.html public/
+            --baseURL "https://wenhaoinchengdu.github.io/"
+          cp index.html public/index.html
           echo "wenhaoinchengdu.github.io" > public/CNAME
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
