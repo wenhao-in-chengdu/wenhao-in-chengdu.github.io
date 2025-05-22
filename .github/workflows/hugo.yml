@@ -53,15 +53,24 @@ jobs:
           HUGO_CACHEDIR: ${{ runner.temp }}/hugo_cache
           HUGO_ENVIRONMENT: production
         run: |
+          # 显示Hugo版本和环境信息
+          hugo version
+          
+          # 生成网站内容
           hugo \
             --minify \
             --verbose \
             --baseURL "https://wenhao-in-chengdu.github.io/"
           
-          # 确保使用静态首页
-          cp index.html public/index.html
+          # 确保使用静态首页作为备份
+          if [ ! -f public/index.html ]; then
+            cp index.html public/index.html
+          fi
           cp static/404.html public/404.html
           echo "wenhao-in-chengdu.github.io" > public/CNAME
+          
+          # 列出生成的文件
+          find public -type f | sort
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
