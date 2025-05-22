@@ -58,5 +58,21 @@ tags: ["标签1", "标签2"]
 如果网站只显示README.md内容而非博客内容，请检查：
 
 1. 确认GitHub Pages设置为通过GitHub Actions部署
+   - 进入 Settings > Pages
+   - Source 应设置为 "GitHub Actions"
+
 2. 查看Actions页面中的工作流是否执行成功
+   - 进入 Actions 标签页
+   - 查看最新的工作流执行情况
+   - 如果有错误，根据错误信息排查问题
+
 3. 确认`hugo.yml`工作流文件存在于`.github/workflows`目录中
+
+4. 如果网站返回404错误：
+   - 检查仓库名称是否正确为 `username.github.io` 格式
+   - 确保 `baseURL` 在 `config.toml` 中设置正确
+   - 确认 Hugo 构建成功生成了 public/index.html 文件
+
+5. 网站空白或样式错误：
+   - 检查CSS路径是否正确
+   - 确保主题文件存在且正确配置
