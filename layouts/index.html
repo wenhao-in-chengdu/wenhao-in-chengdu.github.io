@@ -1,0 +1,63 @@
+{{ define "main" }}
+<div class="home-content">
+    <h1 class="site-title">{{ .Site.Title }}</h1>
+    <p class="site-description">{{ .Site.Params.description }}</p>
+    
+    <!-- 添加分类导航 -->
+    <div class="taxonomy-section">
+        <h2>文章分类</h2>
+        <div class="categories-list">
+            {{ range $name, $taxonomy := .Site.Taxonomies.categories }}
+            <a href="{{ "categories/" | relURL }}{{ $name | urlize }}/" class="category-item">
+                {{ $name }} ({{ len $taxonomy }})
+            </a>
+            {{ end }}
+        </div>
+    </div>
+    
+    <!-- 添加年份导航 -->
+    <div class="taxonomy-section">
+        <h2>按年份浏览</h2>
+        <div class="years-list">
+            {{ range $name, $taxonomy := .Site.Taxonomies.year }}
+            <a href="{{ "year/" | relURL }}{{ $name | urlize }}/" class="year-item">
+                {{ $name }} ({{ len $taxonomy }})
+            </a>
+            {{ end }}
+        </div>
+    </div>
+    
+    <h2 class="recent-posts-heading">最新文章</h2>
+    
+    <div class="post-list">
+        {{ $paginator := .Paginate (where .Site.RegularPages "Type" "in" .Site.Params.mainSections) }}
+        {{ range $paginator.Pages }}
+        <article class="post-item">
+            <h2 class="post-title">
+                <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+            </h2>
+            <div class="post-meta">
+                <time>{{ .Date.Format (default "2006-01-02" .Site.Params.dateFormat) }}</time>
+                {{ with .Params.categories }}
+                <span class="post-category">&middot; {{ range . }}
+                    <a href="{{ "categories/" | relURL }}{{ . | urlize }}/">{{ . }}</a>
+                    {{ end }}</span>
+                {{ end }}
+            </div>
+            <div class="post-summary">
+                {{ .Summary }}
+            </div>
+            <div class="read-more">
+                <a href="{{ .RelPermalink }}">阅读全文</a>
+            </div>
+        </article>
+        {{ end }}
+    </div>
+    
+    <div class="view-archives">
+        <a href="{{ "archives/" | relURL }}" class="archives-link">查看全部归档文章 &rarr;</a>
+    </div>
+    
+    {{ template "_internal/pagination.html" . }}
+</div>
+{{ end }} 
