@@ -41,7 +41,7 @@ paginate = 10
 
 # URL格式配置
 [permalinks]
-  posts = "/:year/:categories/:slug/"
+  posts = "/posts/:year/:slug/"
 
 # 添加年份分类的钩子
 [frontmatter]
