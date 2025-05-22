@@ -1,4 +1,38 @@
 document.addEventListener('DOMContentLoaded', function() {
+  // 监听所有页面链接点击，防止404错误
+  document.querySelectorAll('a').forEach(function(link) {
+    link.addEventListener('click', function(e) {
+      const href = link.getAttribute('href');
+      
+      // 如果是外部链接或锚点链接，不处理
+      if (!href || href.startsWith('http') || href.startsWith('#')) {
+        return;
+      }
+      
+      // 对应表，将静态页面映射到正确位置
+      const staticPages = {
+        '/archives/': '/archives/index.html',
+        '/categories/': '/categories/index.html',
+        '/year/': '/year/index.html',
+        '/about/': '/about/index.html',
+        '/year/2024/': '/year/2024/index.html',
+        '/year/2025/': '/year/2025/index.html',
+        '/categories/网络运维/': '/categories/网络运维/index.html',
+        '/categories/网络架构/': '/categories/网络架构/index.html',
+        '/categories/网站维护/': '/categories/网站维护/index.html',
+        '/posts/2025/test-image/': '/posts/2025/test-image/index.html',
+        '/posts/2025/gallery-example/': '/posts/2025/gallery-example/index.html',
+        '/posts/2025/image-markdown-guide/': '/posts/2025/image-markdown-guide/index.html'
+      };
+      
+      // 如果有对应的静态页面，修改链接
+      if (staticPages[href]) {
+        e.preventDefault();
+        window.location.href = staticPages[href];
+      }
+    });
+  });
+  
   // 检测当前页面URL，如果是404但格式正确，进行重定向
   const path = window.location.pathname;
   
@@ -35,7 +69,7 @@ function loadCategoriesContent() {
   if (!mainContent) return;
   
   mainContent.innerHTML = `<div class="container">
-    <h1>分类: ${decodeURIComponent(categoryName)}</h1>
+    <h1>分类: ${decodeURIComponent(categoryName || '')}</h1>
     <div class="post-list">
       <p>正在加载分类内容...</p>
       <p><a href="/">返回首页</a></p>
@@ -51,9 +85,9 @@ function loadYearContent() {
   if (!mainContent) return;
   
   mainContent.innerHTML = `<div class="container">
-    <h1>${year}年的文章</h1>
+    <h1>${year || '按年份浏览'}年的文章</h1>
     <div class="post-list">
-      <p>正在加载${year}年的文章...</p>
+      <p>正在加载${year || '所有'}年的文章...</p>
       <p><a href="/">返回首页</a></p>
     </div>
   </div>`;
