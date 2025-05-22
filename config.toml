@@ -1,4 +1,4 @@
-baseURL = "https://wenhao-in-chengdu.github.io/"
+baseURL = "https://wenhaoinchengdu.github.io/"
 languageCode = "zh-cn"
 title = "文浩的技术博客"
 theme = "custom"
