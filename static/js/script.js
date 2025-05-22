@@ -1,27 +1,20 @@
 document.addEventListener('DOMContentLoaded', function() {
   // 检测URL中的中文字符问题
-  function checkChineseUrl() {
+  function checkSpecialUrls() {
     const path = window.location.pathname;
     
-    // 如果是分类页面，检查中文编码问题
+    // 如果是旧的分类页面，重定向到新的cat页面
     if (path.includes('/categories/')) {
       const rawCategory = path.split('/categories/')[1].split('/')[0];
       
-      // 检查URL编码是否正确（如%E7%BD%91%E7%BB%9C%E8%BF%90%E7%BB%B4）
       try {
-        // 尝试解码
+        // 尝试解码分类名称
         const decodedCategory = decodeURIComponent(rawCategory);
-        // 再次编码看是否一致
-        const reEncodedCategory = encodeURIComponent(decodedCategory);
-        
-        // 如果编码不一致，说明URL可能存在问题
-        if (reEncodedCategory !== rawCategory) {
-          // 重定向到特殊处理页面
-          window.location.href = '/categories-redirect/?category=' + decodedCategory;
-          return true;
-        }
+        // 重定向到新的cat页面
+        window.location.href = '/cat/?name=' + decodedCategory;
+        return true;
       } catch (e) {
-        // 如果解码失败，也重定向到分类页面
+        // 如果解码失败，重定向到分类列表页面
         window.location.href = '/categories/';
         return true;
       }
@@ -30,8 +23,8 @@ document.addEventListener('DOMContentLoaded', function() {
     return false;
   }
   
-  // 先检查中文URL问题
-  if (checkChineseUrl()) {
+  // 先检查特殊URL
+  if (checkSpecialUrls()) {
     return;
   }
   
@@ -45,37 +38,15 @@ document.addEventListener('DOMContentLoaded', function() {
         return;
       }
       
-      // 检查是否包含中文分类名称
-      if (href.includes('/categories/')) {
-        const parts = href.split('/categories/');
-        if (parts.length > 1) {
-          const categoryPath = parts[1].split('/')[0];
-          // 尝试解码检查是否包含中文
-          try {
-            const decodedCategory = decodeURIComponent(categoryPath);
-            // 如果解码后与原字符串不同，且包含中文字符
-            if (decodedCategory !== categoryPath && /[\u4e00-\u9fa5]/.test(decodedCategory)) {
-              e.preventDefault();
-              window.location.href = '/categories-redirect/?category=' + decodedCategory;
-              return;
-            }
-          } catch (e) {
-            // 解码失败，继续默认处理
-          }
-        }
-      }
-      
       // 对应表，将静态页面映射到正确位置
       const staticPages = {
         '/archives/': '/archives/index.html',
         '/categories/': '/categories/index.html',
         '/year/': '/year/index.html',
         '/about/': '/about/index.html',
+        '/cat/': '/cat/index.html',
         '/year/2024/': '/year/2024/index.html',
         '/year/2025/': '/year/2025/index.html',
-        '/categories/网络运维/': '/categories/网络运维/index.html',
-        '/categories/网络架构/': '/categories/网络架构/index.html',
-        '/categories/网站维护/': '/categories/网站维护/index.html',
         '/posts/2025/test-image/': '/posts/2025/test-image/index.html',
         '/posts/2025/gallery-example/': '/posts/2025/gallery-example/index.html',
         '/posts/2025/image-markdown-guide/': '/posts/2025/image-markdown-guide/index.html'
@@ -97,8 +68,19 @@ document.addEventListener('DOMContentLoaded', function() {
   if (oldArticlePattern.test(path)) {
     const matches = path.match(oldArticlePattern);
     const year = matches[1];
+    const category = matches[2];
     const slug = matches[3];
-    window.location.replace(`/posts/${year}/${slug}/`);
+    
+    // 重定向到新的文章页面和分类页面
+    if (slug && year) {
+      window.location.replace(`/posts/${year}/${slug}/`);
+    } else if (category) {
+      try {
+        window.location.replace(`/cat/?name=${decodeURIComponent(category)}`);
+      } catch (e) {
+        window.location.replace('/categories/');
+      }
+    }
     return;
   }
   

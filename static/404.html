@@ -50,20 +50,27 @@
     </style>
     <script>
         // 特殊处理中文URL的问题
-        function handleChineseUrl() {
+        function handleSpecialUrls() {
             const path = window.location.pathname;
             
-            // 处理分类URL
+            // 处理旧的分类URL，重定向到新的cat页面
             if (path.includes('/categories/')) {
                 try {
                     const categoryPart = path.split('/categories/')[1];
                     const categoryName = categoryPart.split('/')[0];
                     
                     if (categoryName) {
-                        // 对可能是中文的部分进行处理
-                        const decodedName = decodeURIComponent(categoryName);
-                        window.location.href = '/categories-redirect/?category=' + decodedName;
-                        return true;
+                        // 尝试解码中文分类名
+                        try {
+                            const decodedName = decodeURIComponent(categoryName);
+                            window.location.href = '/cat/?name=' + decodedName;
+                            return true;
+                        } catch (e) {
+                            console.error('解码分类名称失败:', e);
+                            // 如果解码失败，直接使用原始名称
+                            window.location.href = '/cat/?name=' + categoryName;
+                            return true;
+                        }
                     }
                 } catch (e) {
                     console.error('处理分类URL时出错:', e);
@@ -74,12 +81,12 @@
         }
         
         window.onload = function() {
-            // 先检查是否为中文URL问题
-            if (handleChineseUrl()) {
+            // 先检查是否为特殊URL
+            if (handleSpecialUrls()) {
                 return;
             }
             
-            // 加载主脚本以处理其他重定向
+            // 如果不是特殊URL，加载主脚本以处理其他重定向
             const script = document.createElement('script');
             script.src = '/js/script.js';
             document.head.appendChild(script);
