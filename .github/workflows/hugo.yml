@@ -58,7 +58,7 @@ jobs:
             --verbose \
             --baseURL "${{ steps.pages.outputs.base_url }}/"
           cp index.html public/
-          echo "${{ steps.pages.outputs.base_url }}" > public/CNAME
+          echo "wenhao-in-chengdu.github.io" > public/CNAME
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
