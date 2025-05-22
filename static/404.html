@@ -33,13 +33,64 @@
         main {
             margin-top: 30px;
         }
+        .loading-spinner {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #0066cc;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
     </style>
-    <script src="/js/script.js"></script>
+    <script>
+        // 特殊处理中文URL的问题
+        function handleChineseUrl() {
+            const path = window.location.pathname;
+            
+            // 处理分类URL
+            if (path.includes('/categories/')) {
+                try {
+                    const categoryPart = path.split('/categories/')[1];
+                    const categoryName = categoryPart.split('/')[0];
+                    
+                    if (categoryName) {
+                        // 对可能是中文的部分进行处理
+                        const decodedName = decodeURIComponent(categoryName);
+                        window.location.href = '/categories-redirect/?category=' + decodedName;
+                        return true;
+                    }
+                } catch (e) {
+                    console.error('处理分类URL时出错:', e);
+                }
+            }
+            
+            return false;
+        }
+        
+        window.onload = function() {
+            // 先检查是否为中文URL问题
+            if (handleChineseUrl()) {
+                return;
+            }
+            
+            // 加载主脚本以处理其他重定向
+            const script = document.createElement('script');
+            script.src = '/js/script.js';
+            document.head.appendChild(script);
+        }
+    </script>
 </head>
 <body>
     <div id="content">
         <h1>404 - 页面未找到</h1>
         <p>正在检查路径和重定向可能性...</p>
+        <div class="loading-spinner"></div>
         <main></main>
         <p><a href="/">返回首页</a></p>
     </div>
