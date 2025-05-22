@@ -1,0 +1,43 @@
+{{ define "main" }}
+<div class="taxonomy-content">
+    <h1 class="page-title">标签"{{ .Title }}"下的文章</h1>
+    
+    <div class="taxonomy-description">
+        <p>共有{{ len .Pages }}篇文章带有"{{ .Title }}"标签。</p>
+    </div>
+    
+    <div class="related-tags">
+        <h3>相关标签：</h3>
+        <div class="tags-list">
+            {{ range $name, $taxonomy := .Site.Taxonomies.tags }}
+            {{ if ne $name $.Title }}
+            <a href="{{ "tags/" | relURL }}{{ $name | urlize }}/" class="category-item">
+                {{ $name }} ({{ len $taxonomy }})
+            </a>
+            {{ end }}
+            {{ end }}
+        </div>
+    </div>
+    
+    <div class="taxonomy-list">
+        <h2>文章列表</h2>
+        <ul class="archive-posts">
+            {{ range .Pages }}
+            <li class="archive-post-item">
+                <time>{{ .Date.Format "2006-01-02" }}</time>
+                <a href="{{ .RelPermalink }}" class="archive-post-link">{{ .Title }}</a>
+                <span class="post-category">
+                    {{ range .Params.categories }}
+                    <a href="{{ "categories/" | relURL }}{{ . | urlize }}/">{{ . }}</a>
+                    {{ end }}
+                </span>
+            </li>
+            {{ end }}
+        </ul>
+    </div>
+    
+    <div class="back-to-archives">
+        <a href="{{ "archives/" | relURL }}" class="archives-link">查看所有归档 &rarr;</a>
+    </div>
+</div>
+{{ end }} 

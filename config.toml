@@ -41,4 +41,18 @@ paginate = 10
 
 # URL格式配置
 [permalinks]
-  posts = "/:year/:categories/:slug/" 
+  posts = "/:year/:categories/:slug/"
+
+# 添加年份分类的钩子
+[frontmatter]
+  date = ["date", "publishDate", "lastmod"]
+  lastmod = ["lastmod", "date", "publishDate"]
+  publishDate = ["publishDate", "date"]
+  expiryDate = ["expiryDate"]
+
+# 启用年份分类生成
+[outputs]
+  home = ["HTML", "RSS"]
+  section = ["HTML", "RSS"]
+  taxonomy = ["HTML"]
+  term = ["HTML", "RSS"] 

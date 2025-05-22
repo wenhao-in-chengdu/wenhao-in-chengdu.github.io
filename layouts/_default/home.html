@@ -3,6 +3,30 @@
     <h1 class="site-title">欢迎来到文浩的技术博客</h1>
     <p class="site-description">这里是我记录技术学习、经验分享和个人成长的地方。</p>
     
+    <!-- 添加分类导航 -->
+    <div class="taxonomy-section">
+        <h2>文章分类</h2>
+        <div class="categories-list">
+            {{ range $name, $taxonomy := .Site.Taxonomies.categories }}
+            <a href="{{ "categories/" | relURL }}{{ $name | urlize }}/" class="category-item">
+                {{ $name }} ({{ len $taxonomy }})
+            </a>
+            {{ end }}
+        </div>
+    </div>
+    
+    <!-- 添加年份导航 -->
+    <div class="taxonomy-section">
+        <h2>按年份浏览</h2>
+        <div class="years-list">
+            {{ range $name, $taxonomy := .Site.Taxonomies.year }}
+            <a href="{{ "year/" | relURL }}{{ $name | urlize }}/" class="year-item">
+                {{ $name }} ({{ len $taxonomy }})
+            </a>
+            {{ end }}
+        </div>
+    </div>
+    
     <h2 class="recent-posts-heading">最新文章</h2>
     
     <div class="post-list">
@@ -28,6 +52,10 @@
             </div>
         </article>
         {{ end }}
+    </div>
+    
+    <div class="view-archives">
+        <a href="{{ "archives/" | relURL }}" class="archives-link">查看全部归档文章 &rarr;</a>
     </div>
     
     {{ template "_internal/pagination.html" . }}
