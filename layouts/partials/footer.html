@@ -1,0 +1,21 @@
+<footer class="site-footer">
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-info">
+                <p>{{ .Site.Title }} &copy; {{ now.Format "2006" }}</p>
+                <p>{{ .Site.Params.description }}</p>
+            </div>
+            <div class="footer-links">
+                {{ with .Site.Social.github }}
+                <a href="https://github.com/{{ . }}" target="_blank">GitHub</a>
+                {{ end }}
+                <a href="{{ .Site.BaseURL }}">首页</a>
+                <a href="{{ "archives/" | relURL }}">归档</a>
+                <a href="{{ "about/" | relURL }}">关于</a>
+            </div>
+        </div>
+        <div class="footer-powered">
+            <p>Powered by <a href="https://gohugo.io" target="_blank">Hugo</a> | Theme by 文浩</p>
+        </div>
+    </div>
+</footer> 

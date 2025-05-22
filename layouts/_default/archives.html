@@ -1,0 +1,29 @@
+{{ define "main" }}
+<div class="archives-content">
+    <h1 class="page-title">{{ .Title }}</h1>
+    
+    <h2>按年份归档</h2>
+    
+    {{ $posts := where .Site.RegularPages "Type" "in" .Site.Params.mainSections }}
+    
+    {{ range $posts.GroupByDate "2006" }}
+    <div class="archive-year">
+        <h3 id="{{ .Key }}">{{ .Key }}</h3>
+        
+        {{ range .Pages.GroupByParam "categories" }}
+        <div class="archive-category">
+            <h4>{{ .Key }}</h4>
+            <ul class="archive-posts">
+                {{ range .Pages }}
+                <li>
+                    <time>{{ .Date.Format "01-02" }}</time>
+                    <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+                </li>
+                {{ end }}
+            </ul>
+        </div>
+        {{ end }}
+    </div>
+    {{ end }}
+</div>
+{{ end }} 

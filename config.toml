@@ -1,0 +1,44 @@
+baseURL = "https://wenhao-in-chengdu.github.io/"
+languageCode = "zh-cn"
+title = "文浩的技术博客"
+theme = "custom"
+hasCJKLanguage = true
+summaryLength = 100
+paginate = 10
+
+# 作者信息
+[author]
+  name = "文浩"
+
+# 网站参数
+[params]
+  description = "记录技术学习、经验分享和个人成长"
+  mainSections = ["posts"]
+  dateFormat = "2006-01-02"
+  
+# 菜单配置
+[menu]
+  [[menu.main]]
+    identifier = "archives"
+    name = "归档"
+    url = "/archives/"
+    weight = 10
+  [[menu.main]]
+    identifier = "about"
+    name = "关于我"
+    url = "/about/"
+    weight = 20
+
+# 社交链接
+[social]
+  github = "wenhao-in-chengdu"
+
+# 分类法
+[taxonomies]
+  category = "categories"
+  tag = "tags"
+  year = "year"
+
+# URL格式配置
+[permalinks]
+  posts = "/:year/:categories/:slug/" 

@@ -1,0 +1,10 @@
+name = "Custom"
+license = "MIT"
+licenselink = "https://github.com/wenhao-in-chengdu/wenhao-in-chengdu.github.io/blob/main/LICENSE"
+description = "文浩的个人博客主题"
+homepage = "https://wenhao-in-chengdu.github.io/"
+min_version = "0.41.0"
+
+[author]
+  name = "文浩"
+  homepage = "https://wenhao-in-chengdu.github.io/" 
