@@ -43,3 +43,20 @@ categories: ["技术类型"]
 tags: ["标签1", "标签2"]
 ---
 ```
+
+## GitHub Pages设置
+
+在GitHub仓库中，需要进行以下设置：
+
+1. 进入仓库的 `Settings` > `Pages`
+2. 在 `Build and deployment` 部分：
+   - 将 `Source` 设置为 `GitHub Actions`
+3. 提交代码后，GitHub Actions会自动构建并部署网站
+
+## 问题排查
+
+如果网站只显示README.md内容而非博客内容，请检查：
+
+1. 确认GitHub Pages设置为通过GitHub Actions部署
+2. 查看Actions页面中的工作流是否执行成功
+3. 确认`hugo.yml`工作流文件存在于`.github/workflows`目录中
