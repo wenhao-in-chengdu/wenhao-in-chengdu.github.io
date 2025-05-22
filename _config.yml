@@ -13,8 +13,13 @@ paginate_path: "/page:num/"
 # Markdown渲染引擎
 markdown: kramdown
 
-# 永久链接格式
-permalink: /:year/:month/:day/:title/
+# 永久链接格式 - 按年份和技术类型归档
+permalink: /:year/:categories/:title/
+
+# 导航页面
+header_pages:
+  - archives.md
+  - about.md
 
 # 社交链接
 social_links:

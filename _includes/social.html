@@ -1,0 +1,4 @@
+<ul class="social-media-list">
+  {%- if site.social_links.github -%}<li><a href="https://github.com/{{ site.social_links.github | cgi_escape | escape }}"><svg class="svg-icon"><use xlink:href="{{ '/assets/minima-social-icons.svg#github' | relative_url }}"></use></svg> <span class="username">{{ site.social_links.github | escape }}</span></a></li>{%- endif -%}
+  {%- if site.social_links.weibo -%}<li><a href="https://www.weibo.com/{{ site.social_links.weibo | cgi_escape | escape }}"><svg class="svg-icon"><use xlink:href="{{ '/assets/minima-social-icons.svg#weibo' | relative_url }}"></use></svg> <span class="username">{{ site.social_links.weibo | escape }}</span></a></li>{%- endif -%}
+</ul> 

@@ -2,7 +2,7 @@
 layout: post
 title: "欢迎来到我的技术博客"
 date: 2025-05-22 14:30:00 +0800
-categories: [博客, 技术]
+categories: [前端开发]
 tags: [介绍, Jekyll]
 ---
 
@@ -35,7 +35,7 @@ tags: [介绍, Jekyll]
 
 感谢你的访问，期待与你在技术的道路上共同成长！
 
-```markdown
+```javascript
 // 示例代码块
 function helloWorld() {
   console.log("欢迎来到文浩的技术博客!");
