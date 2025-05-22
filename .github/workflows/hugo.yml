@@ -57,13 +57,11 @@ jobs:
             --minify \
             --verbose \
             --baseURL "https://wenhao-in-chengdu.github.io/"
+          
+          # 确保使用静态首页
           cp index.html public/index.html
-          echo "wenhao-in-chengdu.github.io" > public/CNAME
-          # 备份静态文件确保有内容
-          if [ ! -f public/index.html ]; then
-            cp static/index.html public/index.html
-          fi
           cp static/404.html public/404.html
+          echo "wenhao-in-chengdu.github.io" > public/CNAME
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
