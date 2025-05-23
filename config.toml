@@ -5,6 +5,7 @@ theme = "custom"
 hasCJKLanguage = true
 summaryLength = 100
 paginate = 10
+publishDir = "docs"
 
 # 作者信息
 [author]

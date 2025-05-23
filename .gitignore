@@ -3,6 +3,9 @@ public/
 resources/
 .hugo_build.lock
 
+# 不要忽略docs目录，因为它是GitHub Pages发布源
+# docs/
+
 # 系统文件
 .DS_Store
 Thumbs.db

@@ -1,13 +1,22 @@
-# Hugo站点构建和部署到GitHub Pages的工作流
-name: Deploy Hugo site to Pages
+# 此工作流已禁用，因为我们使用main分支的docs目录作为GitHub Pages发布源
+# 如需使用GitHub Actions部署，请在GitHub仓库设置中将Pages发布源改为"GitHub Actions"
+
+name: Deploy Hugo site to Pages (DISABLED)
 
 on:
-  # 在推送到默认分支时运行
-  push:
-    branches: ["main"]
-
-  # 允许从Actions选项卡手动运行此工作流
+  # 覆盖原有触发器，使该工作流不会被触发
   workflow_dispatch:
+    inputs:
+      manual_trigger:
+        description: '手动触发部署（禁用状态）'
+        required: false
+        default: 'disabled'
+
+# 以下为原有配置，已被禁用
+# on:
+#   push:
+#     branches: ["main"]
+#   workflow_dispatch:
 
 # 设置GITHUB_TOKEN的权限，以允许部署到GitHub Pages
 permissions:
@@ -63,47 +72,47 @@ jobs:
             --baseURL "${{ steps.pages.outputs.base_url }}/"
           
           # 确保404页面存在并包含客户端路由代码
-          cp static/404.html public/404.html
+          cp static/404.html docs/404.html
           
           # 创建必要的目录结构以支持客户端路由
           # 确保分类目录存在
           for category in 网络架构 网络运维 网站维护 网络开发; do
-            mkdir -p "public/categories/${category}"
+            mkdir -p "docs/categories/${category}"
             # 为每个分类复制index.html以支持客户端路由
-            if [ -f "public/categories/${category}/index.html" ]; then
+            if [ -f "docs/categories/${category}/index.html" ]; then
               echo "分类目录 ${category} 已有index.html文件"
             else
               echo "为分类 ${category} 创建空的index.html文件"
-              echo "<html><head><meta http-equiv=\"refresh\" content=\"0;url=/#/categories/${category}\"></head></html>" > "public/categories/${category}/index.html"
+              echo "<html><head><meta http-equiv=\"refresh\" content=\"0;url=/#/categories/${category}\"></head></html>" > "docs/categories/${category}/index.html"
             fi
           done
           
           # 确保年份目录存在
           for year in 2024 2025; do
-            mkdir -p "public/year/${year}"
+            mkdir -p "docs/year/${year}"
             # 为每个年份复制index.html以支持客户端路由
-            if [ -f "public/year/${year}/index.html" ]; then
+            if [ -f "docs/year/${year}/index.html" ]; then
               echo "年份目录 ${year} 已有index.html文件"
             else
               echo "为年份 ${year} 创建空的index.html文件"
-              echo "<html><head><meta http-equiv=\"refresh\" content=\"0;url=/#/year/${year}\"></head></html>" > "public/year/${year}/index.html"
+              echo "<html><head><meta http-equiv=\"refresh\" content=\"0;url=/#/year/${year}\"></head></html>" > "docs/year/${year}/index.html"
             fi
           done
           
           # 创建.nojekyll文件防止GitHub Pages忽略下划线开头的文件
-          touch public/.nojekyll
+          touch docs/.nojekyll
           
           # 列出生成的文件结构
           echo "生成的网站目录结构:"
-          find public -type d -not -path "*/\.*" | sort
+          find docs -type d -not -path "*/\.*" | sort
           
           echo "生成的HTML文件:"
-          find public -name "*.html" | sort
+          find docs -name "*.html" | sort
 
       - name: 上传构建产物
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./public
+          path: ./docs
 
   # 部署任务
   deploy:
