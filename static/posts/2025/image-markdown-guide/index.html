@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>图片和Markdown使用指南 - 文浩的技术博客</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <style>
+        body {
+            font-family: "PingFang SC", "Microsoft YaHei", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        h1 {
+            margin-bottom: 10px;
+            color: #0066cc;
+        }
+        .post-meta {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+        .post-content {
+            margin-top: 30px;
+            margin-bottom: 30px;
+        }
+        .post-content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 1.5rem auto;
+            border-radius: 4px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .post-content h2 {
+            margin-top: 30px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .post-content h3 {
+            margin-top: 25px;
+            margin-bottom: 15px;
+            color: #444;
+        }
+        pre {
+            background: #f5f5f5;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        code {
+            font-family: Consolas, Monaco, 'Andale Mono', monospace;
+            font-size: 0.9em;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        table th, table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        table th {
+            background-color: #f0f0f0;
+        }
+        a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <article>
+        <h1>图片和Markdown使用指南</h1>
+        <div class="post-meta">
+            发布于：2025-05-30 &middot; 分类：<a href="/cat/?name=网站维护">网站维护</a>
+        </div>
+        
+        <div class="post-content">
+            <h2>Markdown基础语法</h2>
+            
+            <p>Markdown是一种轻量级标记语言，它允许人们使用易读易写的纯文本格式编写文档，然后转换成有效的HTML文档。以下是常用的Markdown语法：</p>
+            
+            <h3>标题</h3>
+            
+            <pre><code># 一级标题
+## 二级标题
+### 三级标题
+#### 四级标题
+##### 五级标题
+###### 六级标题</code></pre>
+            
+            <h3>强调</h3>
+            
+            <pre><code>*斜体文本* 或 _斜体文本_
+**粗体文本** 或 __粗体文本__
+***粗斜体文本*** 或 ___粗斜体文本___</code></pre>
+            
+            <h3>列表</h3>
+            
+            <p>无序列表：</p>
+            
+            <pre><code>* 项目1
+* 项目2
+  * 子项目2.1
+  * 子项目2.2
+* 项目3</code></pre>
+            
+            <p>有序列表：</p>
+            
+            <pre><code>1. 第一项
+2. 第二项
+3. 第三项</code></pre>
+            
+            <h3>链接和图片</h3>
+            
+            <pre><code>[链接文本](URL "可选标题")
+![替代文本](图片URL "可选标题")</code></pre>
+            
+            <h3>代码</h3>
+            
+            <p>行内代码：`code`</p>
+            
+            <p>代码块：</p>
+            
+            <pre><code>```语言名称
+代码内容
+```</code></pre>
+            
+            <h2>在博客中添加图片</h2>
+            
+            <p>在这个博客中，我们建议将图片按照以下目录结构组织：</p>
+            
+            <pre><code>static/
+  images/
+    2024/
+      image-name.jpg
+    2025/
+      another-image.png</code></pre>
+            
+            <p>按年份分类可以使图片管理更加清晰。在文章中引用图片的方法：</p>
+            
+            <pre><code>![图片描述](/images/2025/example-image.jpg)</code></pre>
+            
+            <h3>图片最佳实践</h3>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>项目</th>
+                        <th>建议</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>图片格式</td>
+                        <td>JPG用于照片，PNG用于截图，SVG用于矢量图</td>
+                    </tr>
+                    <tr>
+                        <td>文件大小</td>
+                        <td>控制在300KB以下</td>
+                    </tr>
+                    <tr>
+                        <td>分辨率</td>
+                        <td>宽度不超过1200px</td>
+                    </tr>
+                    <tr>
+                        <td>命名方式</td>
+                        <td>使用有意义的名称，用连字符分隔单词</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h2>高级Markdown技巧</h2>
+            
+            <h3>表格</h3>
+            
+            <pre><code>| 表头1 | 表头2 | 表头3 |
+|-------|-------|-------|
+| 单元格 | 单元格 | 单元格 |
+| 单元格 | 单元格 | 单元格 |
+
+| 左对齐 | 居中对齐 | 右对齐 |
+|:-----|:-----:|-----:|
+| 内容 | 内容 | 内容 |</code></pre>
+            
+            <h3>引用块</h3>
+            
+            <pre><code>> 这是一个引用块
+>> 这是嵌套的引用块</code></pre>
+            
+            <h3>分割线</h3>
+            
+            <pre><code>---
+或
+***
+或
+___</code></pre>
+            
+            <p>掌握这些Markdown语法和图片管理技巧，将帮助你更有效地创建和维护技术博客内容。</p>
+        </div>
+    </article>
+    
+    <div style="margin-top: 40px;">
+        <a href="/year/2025/">查看2025年所有文章</a> | 
+        <a href="/cat/?name=网站维护">查看网站维护分类</a> | 
+        <a href="/">返回首页</a>
+    </div>
+</body>
+</html> 

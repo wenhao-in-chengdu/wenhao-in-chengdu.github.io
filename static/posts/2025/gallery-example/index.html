@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>图片画廊示例 - 文浩的技术博客</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <style>
+        body {
+            font-family: "PingFang SC", "Microsoft YaHei", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        h1 {
+            margin-bottom: 10px;
+            color: #0066cc;
+        }
+        .post-meta {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+        .post-content {
+            margin-top: 30px;
+            margin-bottom: 30px;
+        }
+        .post-content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 1.5rem auto;
+            border-radius: 4px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .post-content h2 {
+            margin-top: 30px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .post-content h3 {
+            margin-top: 25px;
+            margin-bottom: 15px;
+            color: #444;
+        }
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            grid-gap: 15px;
+            margin: 30px 0;
+        }
+        .gallery-item {
+            overflow: hidden;
+            border-radius: 4px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .gallery-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+        a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <article>
+        <h1>图片画廊示例</h1>
+        <div class="post-meta">
+            发布于：2025-06-02 &middot; 分类：<a href="/cat/?name=网络架构">网络架构</a>
+        </div>
+        
+        <div class="post-content">
+            <h2>图片画廊功能介绍</h2>
+            
+            <p>在技术博客中，有时需要展示多张相关图片，例如网络拓扑设计、硬件设备排列或者界面截图等。使用图片画廊功能可以整齐地排列多张图片，提供良好的浏览体验。</p>
+            
+            <h3>简单画廊示例</h3>
+            
+            <p>下面是一个简单的网络设备图片画廊：</p>
+            
+            <div class="gallery">
+                <div class="gallery-item">
+                    <img src="/images/2025/network-diagram.png" alt="网络拓扑图">
+                </div>
+                <div class="gallery-item">
+                    <img src="/images/2025/server-rack.png" alt="服务器机架">
+                </div>
+                <div class="gallery-item">
+                    <img src="/images/2025/switch-panel.png" alt="交换机面板">
+                </div>
+                <div class="gallery-item">
+                    <img src="/images/2025/router-setup.png" alt="路由器设置">
+                </div>
+            </div>
+            
+            <h3>画廊代码示例</h3>
+            
+            <p>使用以下HTML和CSS可以创建响应式图片画廊：</p>
+            
+            <pre><code>&lt;div class="gallery"&gt;
+    &lt;div class="gallery-item"&gt;
+        &lt;img src="/path/to/image1.jpg" alt="描述"&gt;
+    &lt;/div&gt;
+    &lt;div class="gallery-item"&gt;
+        &lt;img src="/path/to/image2.jpg" alt="描述"&gt;
+    &lt;/div&gt;
+    &lt;!-- 更多图片项 --&gt;
+&lt;/div&gt;</code></pre>
+            
+            <p>CSS样式：</p>
+            
+            <pre><code>.gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-gap: 15px;
+    margin: 30px 0;
+}
+.gallery-item {
+    overflow: hidden;
+    border-radius: 4px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+.gallery-item img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.3s ease;
+}
+.gallery-item:hover img {
+    transform: scale(1.05);
+}</code></pre>
+            
+            <h3>画廊使用场景</h3>
+            
+            <p>图片画廊适用于以下场景：</p>
+            <ul>
+                <li>展示网络设备安装过程</li>
+                <li>比较多个网络拓扑方案</li>
+                <li>展示系统界面截图</li>
+                <li>记录硬件维护过程</li>
+            </ul>
+            
+            <p>通过画廊功能，可以让读者更直观地了解技术细节和实施过程。</p>
+        </div>
+    </article>
+    
+    <div style="margin-top: 40px;">
+        <a href="/year/2025/">查看2025年所有文章</a> | 
+        <a href="/cat/?name=网络架构">查看网络架构分类</a> | 
+        <a href="/">返回首页</a>
+    </div>
+</body>
+</html> 
