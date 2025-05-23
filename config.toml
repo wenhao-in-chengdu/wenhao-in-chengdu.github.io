@@ -24,10 +24,20 @@ paginate = 10
     url = "/archives/"
     weight = 10
   [[menu.main]]
+    identifier = "categories"
+    name = "分类"
+    url = "/categories/"
+    weight = 20
+  [[menu.main]]
+    identifier = "year"
+    name = "年份"
+    url = "/year/"
+    weight = 30
+  [[menu.main]]
     identifier = "about"
     name = "关于我"
     url = "/about/"
-    weight = 20
+    weight = 40
 
 # 社交链接
 [social]
@@ -43,6 +53,7 @@ paginate = 10
 [permalinks]
   posts = "/posts/:year/:slug/"
   year = "/year/:slug/"
+  categories = "/categories/:slug/"
 
 # 添加年份分类的钩子
 [frontmatter]

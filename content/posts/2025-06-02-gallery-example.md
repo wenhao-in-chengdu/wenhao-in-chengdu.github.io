@@ -3,6 +3,8 @@ title: "图片画廊示例"
 date: 2025-06-02T10:00:00+08:00
 categories: ["网络架构"]
 tags: ["图片", "画廊", "教程"]
+year: "2025"
+slug: "gallery-example"
 ---
 
 ## 图片画廊功能演示

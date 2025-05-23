@@ -3,6 +3,8 @@ title: "欢迎来到我的技术博客"
 date: 2025-05-22T14:30:00+08:00
 categories: ["网络开发"]
 tags: ["介绍", "Hugo"]
+year: "2025"
+slug: "welcome-to-my-blog"
 ---
 
 ## 欢迎来到我的技术博客

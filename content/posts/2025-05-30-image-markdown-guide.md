@@ -1,8 +1,10 @@
 ---
 title: "图片和Markdown使用指南"
-date: 2025-05-30T10:00:00+08:00
+date: 2025-05-30T11:20:00+08:00
 categories: ["网站维护"]
-tags: ["指南", "Markdown", "图片"]
+tags: ["Markdown", "图片管理", "教程"]
+year: "2025"
+slug: "image-markdown-guide"
 ---
 
 ## 博客图片和Markdown使用指南
