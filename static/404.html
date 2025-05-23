@@ -49,50 +49,34 @@
         }
     </style>
     <script>
-        // 特殊处理URL的问题
+        // 处理特殊URL重定向
         function handleSpecialUrls() {
             const path = window.location.pathname;
             
-            // 处理旧的分类URL，重定向到新的cat页面
+            // 处理旧的分类URL
             if (path.includes('/categories/')) {
                 try {
                     const categoryPart = path.split('/categories/')[1];
-                    const categoryName = categoryPart.split('/')[0];
-                    
-                    if (categoryName) {
-                        // 尝试解码中文分类名
-                        try {
-                            const decodedName = decodeURIComponent(categoryName);
-                            window.location.href = '/cat/?name=' + decodedName;
-                            return true;
-                        } catch (e) {
-                            console.error('解码分类名称失败:', e);
-                            // 如果解码失败，直接使用原始名称
-                            window.location.href = '/cat/?name=' + categoryName;
-                            return true;
-                        }
+                    if (categoryPart) {
+                        const categoryName = categoryPart.split('/')[0];
+                        window.location.href = '/categories/' + categoryName + '/';
+                        return true;
                     }
                 } catch (e) {
                     console.error('处理分类URL时出错:', e);
                 }
             }
             
-            // 处理年份URL，重定向到新的y页面
-            if (path.includes('/year/')) {
-                try {
-                    const yearPart = path.split('/year/')[1];
-                    const yearValue = yearPart.split('/')[0];
-                    
-                    if (yearValue) {
-                        window.location.href = '/y/?year=' + yearValue;
-                        return true;
-                    } else {
-                        // 如果只是/year/，重定向到年份浏览页面
-                        window.location.href = '/y/';
-                        return true;
-                    }
-                } catch (e) {
-                    console.error('处理年份URL时出错:', e);
+            // 处理旧的文章URL格式
+            const oldArticlePattern = /^\/(\d{4})\/([^\/]+)\/([^\/]+)\/?$/;
+            if (oldArticlePattern.test(path)) {
+                const matches = path.match(oldArticlePattern);
+                const year = matches[1];
+                const slug = matches[3];
+                
+                if (slug && year) {
+                    window.location.href = `/posts/${year}/${slug}/`;
+                    return true;
                 }
             }
             

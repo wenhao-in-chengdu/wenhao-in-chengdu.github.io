@@ -1,36 +1,34 @@
 document.addEventListener('DOMContentLoaded', function() {
-  // 检测URL中的中文字符问题
+  // 检测URL中的特殊路径并重定向
   function checkSpecialUrls() {
     const path = window.location.pathname;
     
-    // 如果是旧的分类页面，重定向到新的cat页面
+    // 如果是旧的分类页面，重定向到新的分类页面
     if (path.includes('/categories/')) {
-      const rawCategory = path.split('/categories/')[1].split('/')[0];
-      
       try {
-        // 尝试解码分类名称
-        const decodedCategory = decodeURIComponent(rawCategory);
-        // 重定向到新的cat页面
-        window.location.href = '/cat/?name=' + decodedCategory;
-        return true;
+        const categoryPart = path.split('/categories/')[1];
+        if (categoryPart) {
+          const categoryName = categoryPart.split('/')[0];
+          // 重定向到新的分类页面
+          window.location.href = '/categories/' + categoryName + '/';
+          return true;
+        }
       } catch (e) {
-        // 如果解码失败，重定向到分类列表页面
         window.location.href = '/categories/';
         return true;
       }
     }
     
-    // 如果是旧的年份页面，重定向到新的y页面
-    if (path.includes('/year/')) {
-      const yearPart = path.split('/year/')[1];
-      const yearValue = yearPart ? yearPart.split('/')[0] : '';
+    // 处理旧的文章URL格式 (如 /2025/网络运维/test-image/)
+    const oldArticlePattern = /^\/(\d{4})\/([^\/]+)\/([^\/]+)\/?$/;
+    if (oldArticlePattern.test(path)) {
+      const matches = path.match(oldArticlePattern);
+      const year = matches[1];
+      const slug = matches[3];
       
-      if (yearValue) {
-        window.location.href = '/y/?year=' + yearValue;
-        return true;
-      } else {
-        // 如果只是/year/，重定向到年份浏览页面
-        window.location.href = '/y/';
+      // 重定向到新的文章页面
+      if (slug && year) {
+        window.location.replace(`/posts/${year}/${slug}/`);
         return true;
       }
     }
@@ -57,10 +55,7 @@ document.addEventListener('DOMContentLoaded', function() {
       const staticPages = {
         '/archives/': '/archives/index.html',
         '/categories/': '/categories/index.html',
-        '/year/': '/y/',
         '/about/': '/about/index.html',
-        '/cat/': '/cat/index.html',
-        '/y/': '/y/index.html',
         '/posts/2025/test-image/': '/posts/2025/test-image/index.html',
         '/posts/2025/gallery-example/': '/posts/2025/gallery-example/index.html',
         '/posts/2025/image-markdown-guide/': '/posts/2025/image-markdown-guide/index.html'
@@ -73,44 +68,6 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
   });
-  
-  // 检测当前页面URL，如果是404但格式正确，进行重定向
-  const path = window.location.pathname;
-  
-  // 处理旧的文章URL格式 (如 /2025/网络运维/test-image/)
-  const oldArticlePattern = /^\/(\d{4})\/([^\/]+)\/([^\/]+)\/?$/;
-  if (oldArticlePattern.test(path)) {
-    const matches = path.match(oldArticlePattern);
-    const year = matches[1];
-    const category = matches[2];
-    const slug = matches[3];
-    
-    // 重定向到新的文章页面和分类页面
-    if (slug && year) {
-      window.location.replace(`/posts/${year}/${slug}/`);
-    } else if (category) {
-      try {
-        window.location.replace(`/cat/?name=${decodeURIComponent(category)}`);
-      } catch (e) {
-        window.location.replace('/categories/');
-      }
-    }
-    return;
-  }
-  
-  // 处理分类页面
-  if (path.startsWith('/categories/')) {
-    // 保持当前URL，页面内容会通过JS动态加载
-    loadCategoriesContent();
-    return;
-  }
-  
-  // 处理年份页面
-  if (path.startsWith('/year/')) {
-    // 保持当前URL，页面内容会通过JS动态加载
-    loadYearContent();
-    return;
-  }
 });
 
 // 动态加载分类页面内容
