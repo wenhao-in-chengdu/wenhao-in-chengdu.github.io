@@ -20,6 +20,21 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     }
     
+    // 如果是旧的年份页面，重定向到新的y页面
+    if (path.includes('/year/')) {
+      const yearPart = path.split('/year/')[1];
+      const yearValue = yearPart ? yearPart.split('/')[0] : '';
+      
+      if (yearValue) {
+        window.location.href = '/y/?year=' + yearValue;
+        return true;
+      } else {
+        // 如果只是/year/，重定向到年份浏览页面
+        window.location.href = '/y/';
+        return true;
+      }
+    }
+    
     return false;
   }
   
@@ -42,11 +57,10 @@ document.addEventListener('DOMContentLoaded', function() {
       const staticPages = {
         '/archives/': '/archives/index.html',
         '/categories/': '/categories/index.html',
-        '/year/': '/year/index.html',
+        '/year/': '/y/',
         '/about/': '/about/index.html',
         '/cat/': '/cat/index.html',
-        '/year/2024/': '/year/2024/index.html',
-        '/year/2025/': '/year/2025/index.html',
+        '/y/': '/y/index.html',
         '/posts/2025/test-image/': '/posts/2025/test-image/index.html',
         '/posts/2025/gallery-example/': '/posts/2025/gallery-example/index.html',
         '/posts/2025/image-markdown-guide/': '/posts/2025/image-markdown-guide/index.html'

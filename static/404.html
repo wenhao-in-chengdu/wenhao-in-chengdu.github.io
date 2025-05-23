@@ -49,7 +49,7 @@
         }
     </style>
     <script>
-        // 特殊处理中文URL的问题
+        // 特殊处理URL的问题
         function handleSpecialUrls() {
             const path = window.location.pathname;
             
@@ -74,6 +74,25 @@
                     }
                 } catch (e) {
                     console.error('处理分类URL时出错:', e);
+                }
+            }
+            
+            // 处理年份URL，重定向到新的y页面
+            if (path.includes('/year/')) {
+                try {
+                    const yearPart = path.split('/year/')[1];
+                    const yearValue = yearPart.split('/')[0];
+                    
+                    if (yearValue) {
+                        window.location.href = '/y/?year=' + yearValue;
+                        return true;
+                    } else {
+                        // 如果只是/year/，重定向到年份浏览页面
+                        window.location.href = '/y/';
+                        return true;
+                    }
+                } catch (e) {
+                    console.error('处理年份URL时出错:', e);
                 }
             }
             
