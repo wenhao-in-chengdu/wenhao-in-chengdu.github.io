@@ -62,18 +62,36 @@ jobs:
             --verbose \
             --baseURL "${{ steps.pages.outputs.base_url }}/"
           
-          # 确保404页面存在
-          cp static/404.html public/404.html || true
+          # 确保404页面存在并包含客户端路由代码
+          cp static/404.html public/404.html
           
+          # 创建必要的目录结构以支持客户端路由
           # 确保分类目录存在
           for category in 网络架构 网络运维 网站维护 网络开发; do
             mkdir -p "public/categories/${category}"
+            # 为每个分类复制index.html以支持客户端路由
+            if [ -f "public/categories/${category}/index.html" ]; then
+              echo "分类目录 ${category} 已有index.html文件"
+            else
+              echo "为分类 ${category} 创建空的index.html文件"
+              echo "<html><head><meta http-equiv=\"refresh\" content=\"0;url=/#/categories/${category}\"></head></html>" > "public/categories/${category}/index.html"
+            fi
           done
           
           # 确保年份目录存在
           for year in 2024 2025; do
             mkdir -p "public/year/${year}"
+            # 为每个年份复制index.html以支持客户端路由
+            if [ -f "public/year/${year}/index.html" ]; then
+              echo "年份目录 ${year} 已有index.html文件"
+            else
+              echo "为年份 ${year} 创建空的index.html文件"
+              echo "<html><head><meta http-equiv=\"refresh\" content=\"0;url=/#/year/${year}\"></head></html>" > "public/year/${year}/index.html"
+            fi
           done
+          
+          # 创建.nojekyll文件防止GitHub Pages忽略下划线开头的文件
+          touch public/.nojekyll
           
           # 列出生成的文件结构
           echo "生成的网站目录结构:"
