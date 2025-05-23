@@ -68,36 +68,4 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
   });
-});
-
-// 动态加载分类页面内容
-function loadCategoriesContent() {
-  const categoryName = window.location.pathname.split('/')[2];
-  const mainContent = document.querySelector('main');
-  
-  if (!mainContent) return;
-  
-  mainContent.innerHTML = `<div class="container">
-    <h1>分类: ${decodeURIComponent(categoryName || '')}</h1>
-    <div class="post-list">
-      <p>正在加载分类内容...</p>
-      <p><a href="/">返回首页</a></p>
-    </div>
-  </div>`;
-}
-
-// 动态加载年份页面内容
-function loadYearContent() {
-  const year = window.location.pathname.split('/')[2];
-  const mainContent = document.querySelector('main');
-  
-  if (!mainContent) return;
-  
-  mainContent.innerHTML = `<div class="container">
-    <h1>${year || '按年份浏览'}年的文章</h1>
-    <div class="post-list">
-      <p>正在加载${year || '所有'}年的文章...</p>
-      <p><a href="/">返回首页</a></p>
-    </div>
-  </div>`;
-} 
+}); 

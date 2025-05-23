@@ -73,10 +73,21 @@ jobs:
           # 确保year/2025目录及其索引文件存在
           mkdir -p public/year/2025
           if [ ! -f public/year/2025/index.html ]; then
-            # 如果不存在，复制静态/y目录中的年份页面并修改为对应年份
-            cp static/y/index.html public/year/2025/index.html || true
-            # 替换查询参数方式为直接加载2025年内容
-            sed -i 's/const urlParams = new URLSearchParams(window.location.search);/const urlParams = new URLSearchParams("year=2025");/g' public/year/2025/index.html || true
+            # 如果不存在，生成简单的年份索引文件
+            cat > public/year/2025/index.html << EOF
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>2025年文章 - 文浩的技术博客</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <meta http-equiv="refresh" content="0;url=/year/2025/">
+</head>
+<body>
+    <p>正在跳转到<a href="/year/2025/">年份页面</a>...</p>
+</body>
+</html>
+EOF
           fi
           
           # 列出生成的文件
