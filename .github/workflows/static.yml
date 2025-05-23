@@ -1,13 +1,24 @@
-# Simple workflow for deploying static content to GitHub Pages
-name: Deploy static content to Pages
+# 此工作流已禁用，改为使用hugo.yml工作流
+# 请勿删除此文件，如需重新启用请移除下面的on: 覆盖
 
 on:
-  # Runs on pushes targeting the default branch
-  push:
-    branches: ["main"]
-
-  # Allows you to run this workflow manually from the Actions tab
+  # 覆盖原有触发器，使该工作流不会被触发
   workflow_dispatch:
+    inputs:
+      manual_trigger:
+        description: '手动触发部署（禁用状态）'
+        required: false
+        default: 'disabled'
+
+# 以下为原有配置，已被禁用
+# Simple workflow for deploying static content to GitHub Pages
+name: Deploy static content to Pages (DISABLED)
+
+# 原有触发器已被覆盖
+# on:
+#   push:
+#     branches: ["main"]
+#   workflow_dispatch:
 
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:

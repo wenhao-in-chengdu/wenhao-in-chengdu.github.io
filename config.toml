@@ -42,6 +42,7 @@ paginate = 10
 # URL格式配置
 [permalinks]
   posts = "/posts/:year/:slug/"
+  year = "/year/:slug/"
 
 # 添加年份分类的钩子
 [frontmatter]
@@ -55,4 +56,10 @@ paginate = 10
   home = ["HTML", "RSS"]
   section = ["HTML", "RSS"]
   taxonomy = ["HTML"]
-  term = ["HTML", "RSS"] 
+  term = ["HTML", "RSS"]
+
+# 确保年份页面正确生成
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true 
