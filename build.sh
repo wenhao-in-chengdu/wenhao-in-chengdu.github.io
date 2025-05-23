@@ -37,6 +37,48 @@ for year in 2024 2025; do
   fi
 done
 
+# 添加对/y/路径的支持
+mkdir -p "docs/y"
+cat > "docs/y/index.html" << EOF
+<html>
+<head>
+<script>
+const urlParams = new URLSearchParams(window.location.search);
+const year = urlParams.get('year');
+if (year) {
+  window.location.href = '/#/year/' + year;
+} else {
+  window.location.href = '/';
+}
+</script>
+</head>
+<body>
+<p>正在重定向...</p>
+</body>
+</html>
+EOF
+
+# 添加对/cat/路径的支持
+mkdir -p "docs/cat"
+cat > "docs/cat/index.html" << EOF
+<html>
+<head>
+<script>
+const urlParams = new URLSearchParams(window.location.search);
+const category = urlParams.get('name');
+if (category) {
+  window.location.href = '/#/categories/' + category;
+} else {
+  window.location.href = '/';
+}
+</script>
+</head>
+<body>
+<p>正在重定向...</p>
+</body>
+</html>
+EOF
+
 # 创建.nojekyll文件防止GitHub Pages忽略下划线开头的文件
 touch docs/.nojekyll
 

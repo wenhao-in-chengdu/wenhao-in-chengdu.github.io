@@ -36,6 +36,14 @@ for %%y in (2024 2025) do (
   )
 )
 
+REM 添加对/y/路径的支持
+mkdir "docs\y"
+echo ^<html^>^<head^>^<script^>const urlParams = new URLSearchParams(window.location.search); const year = urlParams.get('year'); if (year) { window.location.href = '/#/year/' + year; } else { window.location.href = '/'; }^</script^>^</head^>^<body^>^<p^>正在重定向...^</p^>^</body^>^</html^> > "docs\y\index.html"
+
+REM 添加对/cat/路径的支持
+mkdir "docs\cat"
+echo ^<html^>^<head^>^<script^>const urlParams = new URLSearchParams(window.location.search); const category = urlParams.get('name'); if (category) { window.location.href = '/#/categories/' + category; } else { window.location.href = '/'; }^</script^>^</head^>^<body^>^<p^>正在重定向...^</p^>^</body^>^</html^> > "docs\cat\index.html"
+
 REM 创建.nojekyll文件防止GitHub Pages忽略下划线开头的文件
 echo. > docs\.nojekyll
 

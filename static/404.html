@@ -49,9 +49,27 @@
         }
     </style>
     <script>
+        // 获取URL查询参数
+        function getQueryParam(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
+        
         // 处理特殊URL重定向
         function handleSpecialUrls() {
             const path = window.location.pathname;
+            
+            // 处理/y/?year=格式URL
+            if (path === '/y/' || path === '/y') {
+                const year = getQueryParam('year');
+                if (year && /^\d{4}$/.test(year)) {
+                    // 保存当前路径到会话存储
+                    sessionStorage.setItem('redirectPath', `/year/${year}`);
+                    // 重定向到首页，首页会检查sessionStorage并处理路由
+                    window.location.href = '/#/year/' + year;
+                    return true;
+                }
+            }
             
             // 处理年份URL
             if (path.includes('/year/')) {
@@ -70,6 +88,18 @@
                     }
                 } catch (e) {
                     console.error('处理年份URL时出错:', e);
+                }
+            }
+            
+            // 处理/cat/?name=格式URL
+            if (path === '/cat/' || path === '/cat') {
+                const category = getQueryParam('name');
+                if (category) {
+                    // 保存当前路径到会话存储
+                    sessionStorage.setItem('redirectPath', `/categories/${category}`);
+                    // 重定向到首页，首页会检查sessionStorage并处理路由
+                    window.location.href = '/#/categories/' + category;
+                    return true;
                 }
             }
             
