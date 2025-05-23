@@ -4,7 +4,7 @@ date: 2024-12-20T10:30:00+08:00
 categories: ["网络运维"]
 tags: ["网络监控", "故障排查", "Shell脚本"]
 year: "2024"
-slug: "database-optimization"
+slug: "network-monitoring"
 ---
 
 ## 网络监控与故障排查实践

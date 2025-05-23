@@ -62,41 +62,26 @@ jobs:
             --verbose \
             --baseURL "${{ steps.pages.outputs.base_url }}/"
           
-          # 确保使用静态首页作为备份
-          if [ ! -f public/index.html ]; then
-            cp index.html public/index.html || true
-          fi
-          
           # 确保404页面存在
           cp static/404.html public/404.html || true
           
-          # 确保year/2025目录及其索引文件存在
-          mkdir -p public/year/2025
-          if [ ! -f public/year/2025/index.html ]; then
-            # 如果不存在，生成简单的年份索引文件
-            cat > public/year/2025/index.html << EOF
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <title>2025年文章 - 文浩的技术博客</title>
-    <link rel="stylesheet" href="/css/style.css">
-    <meta http-equiv="refresh" content="0;url=/year/2025/">
-</head>
-<body>
-    <p>正在跳转到<a href="/year/2025/">年份页面</a>...</p>
-</body>
-</html>
-EOF
-          fi
+          # 确保分类目录存在
+          for category in 网络架构 网络运维 网站维护 网络开发; do
+            mkdir -p "public/categories/${category}"
+          done
           
-          # 列出生成的文件
-          echo "列出生成的year目录文件:"
-          find public/year -type f | sort
+          # 确保年份目录存在
+          for year in 2024 2025; do
+            mkdir -p "public/year/${year}"
+          done
           
-          # 查看是否有年份页面
-          echo "检查year/2025/index.html是否存在:"
-          ls -la public/year/2025/index.html || echo "未找到该文件"
+          # 列出生成的文件结构
+          echo "生成的网站目录结构:"
+          find public -type d -not -path "*/\.*" | sort
+          
+          echo "生成的HTML文件:"
+          find public -name "*.html" | sort
+
       - name: 上传构建产物
         uses: actions/upload-pages-artifact@v3
         with:

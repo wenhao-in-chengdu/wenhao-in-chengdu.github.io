@@ -2,7 +2,7 @@
 title: "关于我"
 date: 2025-05-22T14:00:00+08:00
 menu: "main"
-weight: 20
+weight: 40
 ---
 
 ## 关于我
@@ -22,7 +22,6 @@ weight: 20
 ### 联系方式
 
 - GitHub: [wenhao-in-chengdu](https://github.com/wenhao-in-chengdu)
-- 邮箱: [你的邮箱]
 
 ### 博客介绍
 

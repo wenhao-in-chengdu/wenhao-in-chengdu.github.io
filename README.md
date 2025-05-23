@@ -4,10 +4,10 @@
 
 ## 博客内容
 
-- 技术学习笔记
-- 项目开发经验
-- 编程心得体会
-- 技术书籍阅读笔记
+- 网络架构设计经验
+- 网络运维与安全实践
+- 网站开发与维护心得
+- 自动化脚本与工具分享
 
 ## 技术栈
 
@@ -20,27 +20,32 @@
 
 ## 本地开发
 
-1. 安装Hugo环境
+1. 安装Hugo环境（推荐版本0.134.0或更高）
 2. 克隆仓库：`git clone https://github.com/wenhao-in-chengdu/wenhao-in-chengdu.github.io.git`
 3. 本地运行：`hugo server -D`
 4. 浏览器访问：`http://localhost:1313`
 
 ## 文章归档
 
-所有博客文章按年份和技术类型归档，URL格式为`/:year/:categories/:title/`。
+所有博客文章按年份和分类归档：
+- 年份归档：`/year/YYYY/`（如`/year/2025/`）
+- 分类归档：`/categories/分类名/`（如`/categories/网络架构/`）
+- 文章URL格式：`/posts/:year/:slug/`（如`/posts/2025/network-design/`）
 
 ## 文章编写
 
 所有博客文章放在`content/posts`目录下，文件名格式为`YYYY-MM-DD-title.md`。
 
-文章头部需要包含以下YAML头信息：
+文章头部需要包含以下Front Matter信息：
 
 ```yaml
 ---
 title: "文章标题"
 date: YYYY-MM-DDT00:00:00+08:00
-categories: ["技术类型"]
+categories: ["分类名称"]
 tags: ["标签1", "标签2"]
+year: "YYYY"  # 年份，用于年份归档
+slug: "article-slug"  # 文章URL路径
 ---
 ```
 
